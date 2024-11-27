@@ -3,9 +3,9 @@ Este repositório contém uma implementação simples de um cliente SNTP (Simple
 
 O cliente SNTP desenvolvido realiza as seguintes ações:
 
-    Envia uma mensagem SNTP para um servidor NTP especificado pelo usuário.
-    Recebe e interpreta a resposta do servidor, exibindo a data e a hora sincronizadas no console.
-    Gerencia o tempo limite (timeout) e retentativas, avisando caso não seja possível contatar o servidor.
+- Envia uma mensagem SNTP para um servidor NTP especificado pelo usuário.
+- Recebe e interpreta a resposta do servidor, exibindo a data e a hora sincronizadas no console.
+- Gerencia o tempo limite (timeout) e retentativas, avisando caso não seja possível contatar o servidor.
 
 A implementação utiliza a biblioteca nativa de sockets do Python para criar a comunicação com o servidor por meio do protocolo UDP, na porta 123.
 
