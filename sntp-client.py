@@ -10,7 +10,14 @@ MSG_SNTP = b'\x1b' + 47 * b'\0'
 
 
 def consultar_servidor_ntp():
-    pass
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+            s.settimeout(TIMEOUT)
+            try:
+                s.sendto(MSG_SNTP, (NTP_SERVER, PORT))
+                data, _ = s.recvfrom(1024)
+                return data
+            except socket.timeout:
+                return None
         
 for tentativa in range(2):
     resultado = consultar_servidor_ntp()
@@ -18,6 +25,6 @@ for tentativa in range(2):
         print(f'Data/hora: {resultado}')
         break
     else:
-        print("Tentativa falhou. Segunda tentativa")
+        print("Tentativa falhou. Tentando novamente...")
 else:
         print("Data/hora: não foi possível contactar servidor")
