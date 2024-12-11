@@ -4,7 +4,8 @@ Este repositório contém uma implementação simples de um cliente SNTP (Simple
 O cliente SNTP desenvolvido realiza as seguintes ações:
 
 - Envia uma mensagem SNTP para um servidor NTP especificado pelo usuário.
-- Recebe e interpreta a resposta do servidor, exibindo a data e a hora sincronizadas no console.
+- Recebe a resposta do servidor, exibindo a data e a hora sincronizadas no console.
+- Interpreta a resposta recebida subtraindo o formato de horários da resposta SNTP, contado em segundos a partir de 1900, do Linux, contado em segundos a partir de 1970.
 - Gerencia o tempo limite (timeout) e retentativas, avisando caso não seja possível contatar o servidor.
 
 A implementação utiliza a biblioteca nativa de sockets do Python para criar a comunicação com o servidor por meio do protocolo UDP, na porta 123.
@@ -17,7 +18,12 @@ A implementação utiliza a biblioteca nativa de sockets do Python para criar a 
 - Saída formatada no console com a data e hora no padrão:
 - Data/hora: Qui Mar 28 23:11:16 2019
 
-## Detalhes Técnicos
+## Ambientes
+
+- Sistema Operacional: Linux
+- Ambiente de Desenvolvimento: VSCode
+
+## Como construir a aplicação
 
 A mensagem SNTP consiste em uma estrutura de 48 bytes, conforme a RFC 1769. Apenas o campo txTm_s (timestamp de transmissão) é essencial para determinar a hora atual.
 
@@ -43,3 +49,26 @@ typedef struct {
     uint32_t txTm_f;
 } ntp_packet;
 ```
+
+## Como executar
+
+- Clone o repositório para seu dispositivo
+```bash
+git clone git@github.com:JeffersonSenaa/udp-time-sync-client.git
+```
+
+- Certifique-se de ter o python instalado
+
+- Execute o código Python
+```bash
+python3 sntp-client.py
+```
+
+- Insira os dados de entrada: servidor NTP 
+```bash
+pool.ntp.org
+```
+
+## Instruções de Uso
+
+## Limitações
