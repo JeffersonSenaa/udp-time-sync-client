@@ -1,5 +1,6 @@
 # UDP Time Sync Client
-Este trabalho contém uma implementação simples de um cliente SNTP (Simple Network Time Protocol) usando Python. O projeto foi desenvolvido como parte de um trabalho acadêmico para a disciplina de Redes de Computadores, com o objetivo de estudar a comunicação por meio do protocolo UDP e a sincronização de horários com servidores NTP.
+
+Este trabalho contém uma implementação de um cliente SNTP (Simple Network Time Protocol) usando Python. O projeto foi desenvolvido como parte de um trabalho acadêmico para a disciplina de Redes de Computadores, com o objetivo de estudar a comunicação por meio do protocolo UDP e a sincronização de horários com servidores NTP.
 
 O cliente SNTP desenvolvido realiza as seguintes ações:
 
@@ -27,7 +28,6 @@ A implementação utiliza a biblioteca nativa de sockets do Python para criar a 
 A mensagem SNTP consiste em uma estrutura de 48 bytes, conforme a RFC 1769. Apenas o campo txTm_s (timestamp de transmissão) é essencial para determinar a hora atual.
 
 Estrutura da mensagem SNTP:
-Implementada com um struct no formato especificado:
 
 ```bash
 typedef struct {
