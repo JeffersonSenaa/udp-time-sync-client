@@ -3,7 +3,6 @@ import struct
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 
-NTP_SERVER = "pool.ntp.org" #Servidor NTP público
 PORT = 123
 TIMEOUT = 20
 MSG_SNTP = b'\x1b' + 47 * b'\0'
@@ -16,22 +15,23 @@ def interpretar_resposta(data):
     timestamp = txTm_s - EPOCH_SNTPS_TO_UNIX  
     return datetime.fromtimestamp(timestamp, timezone.utc).astimezone(ZoneInfo("America/Sao_Paulo")).strftime('%a %b %d %H:%M:%S %Y')
 
-def consultar_servidor_ntp():
-        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
-            s.settimeout(TIMEOUT)
-            try:
-                s.sendto(MSG_SNTP, (NTP_SERVER, PORT))
-                data, _ = s.recvfrom(1024)
-                return interpretar_resposta(data)
-            except socket.timeout:
-                return None
+def consultar_servidor_ntp(ntp_server):
+    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+        s.settimeout(TIMEOUT)
+        try:
+            s.sendto(MSG_SNTP, (ntp_server, PORT))
+            data, _ = s.recvfrom(1024)
+            return interpretar_resposta(data)
+        except socket.timeout:
+            return None
         
+ntp_server = input("Endereço IP do servidor: ")
 for tentativa in range(2):
-    resultado = consultar_servidor_ntp()
+    resultado = consultar_servidor_ntp(ntp_server)
     if resultado:
         print(f'Data/hora: {resultado}')
         break
     else:
         print("Tentativa falhou. Segunda tentativa...")
 else:
-        print("Data/hora: não foi possível contactar servidor")
+    print("Data/hora: não foi possível contactar servidor")
