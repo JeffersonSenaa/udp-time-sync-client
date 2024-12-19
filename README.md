@@ -70,5 +70,4 @@ pool.ntp.org
 
 ## Limitações
 - Dependência de uma conexão ativa com o servidor NTP.
-- Não possui suporte a servidores NTP que utilizam autenticação.
 - Caso o servidor responda fora do tempo limite, a requisição será considerada como falha.
